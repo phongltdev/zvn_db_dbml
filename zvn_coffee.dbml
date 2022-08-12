@@ -1,0 +1,89 @@
+Project zvn_coffee {
+  database_type: 'MySQL'
+  Note: '''
+    # Quán Coffee
+    
+    > #### db mẫu
+  '''
+}
+
+table invoice {
+  id int 
+  type varchar
+  time_in datetime
+  time_out datetime
+  location varchar
+  payment_method varchar
+  paid_amount varchar
+  change_amount varchar
+  total_price int
+  staff_id int
+}
+
+table product {
+  id int
+  name varchar
+  ordering int
+  status int
+  created_by int
+  created_at datetime
+  modified_by int
+  modified_at datetime
+  price int
+}
+
+table invoice_product {
+  id int
+  product_id int
+  invoice_id int
+  quantity int
+  price int
+}
+
+table staff {
+  id int
+  name varchar
+  ordering int
+  status int [
+    note: '
+      0 = inactive, 
+      1 = active, 
+    ']
+  created_by int
+  created_at datetime
+  modified_by int
+  modified_at datetime
+}
+
+
+ref: product.id < invoice_product.product_id
+ref: invoice.id < invoice_product.invoice_id
+ref: staff.id < invoice.staff_id
+
+
+// pro plan 
+
+TableGroup invoice_product { // tablegroup is case-insensitive.
+    invoice 
+    product 
+    invoice_product
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

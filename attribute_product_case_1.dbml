@@ -1,0 +1,30 @@
+Project Attribute_Product_Case_1 {
+  database_type: 'MySQL'
+  Note: '''
+    # Giải pháp thuộc tính sản phẩm
+    
+    > #### sản phẩm có 1 nhóm thuộc tính
+
+  '''
+}
+
+Table product {
+  id int [PK, increment]
+  name varchar
+  group_attribute_id int
+}
+
+Table group_attribute {
+  id int [PK, increment]
+  name varchar
+}
+
+Table attribute {
+  id int [PK, increment]
+  name varchar
+  change_price int 
+  group_attribute_id int
+}
+
+Ref: group_attribute.id < product.group_attribute_id
+Ref: group_attribute.id < attribute.group_attribute_id
